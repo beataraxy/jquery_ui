@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tabs</title>
+    <script src="jquery-2.0.0.min.js"></script>
+    <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
+    <style>
+        body {
+            background-color: #fa8c35;
+        }
+
+        .wrapper {
+            width: 800px;
+            margin: 0 auto;
+            padding: 30px 0 10px 0;
+        }
+
+        .wrapper h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .tabs_border {
+            padding: 20px;
+            margin: 0 auto;
+            width: 800px;
+
+        }
+
+        .ui-tabs-panel {
+            font-size: 24px;
+        }
+
+        .ui-dialog {
+            top: 600px !important;
+            left: 547.5px !important;
+        }
+
+        .ui-draggable .ui-dialog-titlebar {
+            cursor: default;
+        }
+
+        .ui_icon_calendar {
+            background-position: -32px -112px;
+
+        }
+
+        .ui_icon_video {
+            background-position: -224px -128px;
+        }
+        p.ui-selected{
+            color: #67A79A;
+            font-weight: bold;
+        }
+
+    </style>
+    <link rel="stylesheet" href="public.css">
+</head>
+<body>
+<div class="backs"></div>
+<div class="wrapper"><h1>Tabs</h1></div>
+<div class="tabs_border">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab1">M</a></li>
+            <li><a href="#tab2">M</a></li>
+            <li><a href="#tab3">M</a></li>
+        </ul>
+        <div id="tab1">hello,im first tab</div>
+        <div id="tab2">hello,im second tab</div>
+        <div id="tab3">hello,im third tab</div>
+    </div>
+</div>
+<!--2-->
+<div class="wrapper"><h1>accordion</h1></div>
+<div class="tabs_border">
+    <div id="accordion">
+        <h1><a>menu 1</a></h1>
+        <div>contents 1</div>
+        <h1><a>menu 2</a></h1>
+        <div>contents 2</div>
+        <h1><a>menu 3</a></h1>
+        <div>contents 3</div>
+    </div>
+</div>
+
+<!--3-->
+<div class="wrapper"><h1>dialog</h1></div>
+<div class="tabs_border">
+    <div id="dialog" title="Window title">
+        <p>hello, im a dialog.</p>
+    </div>
+</div>
+
+<div class="wrapper" style="margin-top: 170px"><h1>button</h1></div>
+<div class="tabs_border">
+    <div id="fm_button_div" style="margin-right: 50px">
+        <input type="radio" name="sex" id="m"><label for="m">male</label></input>
+        <input type="radio" name="sex" id="f"><label for="f">female</label></input>
+    </div>
+    <span id="button1">button1</span>
+
+    <div id="checkbox_button_div" style="margin-left: 50px">
+        <input type="checkbox" name="red" id="red"><label for="red">red</label></input>
+        <input type="checkbox" name="green" id="green"><label for="green">green</label></input>
+        <input type="checkbox" name="grey" id="grey"><label for="grey">green</label></input>
+    </div>
+
+    <span id="dates" style="margin-left: 50px">dates</span>
+</div>
+
+<div class="wrapper"><h1>progressbar</h1></div>
+<div class="tabs_border">
+    <div id="progressbar"></div>
+    <p id="percent"></p>
+</div>
+
+<div class="wrapper"><h1>slider</h1></div>
+<div class="tabs_border">
+    <div id="slider"></div>
+    <p id="slider_value"></p>
+</div>
+
+<div class="wrapper"><h1>date</h1></div>
+<div class="tabs_border">
+    全天：<input id="date1"/>
+    工作日：<input id="date2"/>
+</div>
+
+<div class="wrapper"><h1>autocomplete</h1></div>
+<div class="tabs_border">
+    <input id="book"/>
+</div>
+
+<div class="wrapper"><h1>autocomplete</h1></div>
+<div class="tabs_border">
+    <h2>books</h2>
+    <div id="books">
+        <img src="tomato.png" height="80px"/>
+        <img src="pipe.png" height="80px"/>
+        <img src="carrot.png" height="80px"/>
+        <img src="start.png" height="80px"/>
+    </div>
+    <hr/>
+
+    <h2>cart:</h2>
+    <div id="shopping" style="width:400px;height: 100px;border:1px solid red">
+
+    </div>
+</div>
+
+<div class="wrapper"><h1>selected</h1></div>
+<div class="tabs_border">
+    <div id="div1">
+        <p>hellome</p>
+        <p>byebye2</p>
+    </div>
+</div>
+
+<div class="wrapper"><h1>sortbale</h1></div>
+<div class="tabs_border">
+    <div id="div2">
+        <p>hello,im first</p>
+        <p>120</p>
+    </div>
+</div>
+
+<div class="wrapper"><h1>resizable</h1></div>
+<div class="tabs_border" style="height:100px">
+    <img id="img1" style="border:1px solid red;overflow: hidden" src="tomato.png"/>
+</div>
+
+<div style="margin-bottom: 100px"></div>
+</body>
+<script>
+
+
+    $(document).ready(function (){
+
+
+        $("#img1").resizable();
+        $("#img1").effect("puff",{mode:"show"},1000);
+
+//        sortable
+        $("#div2").sortable({
+            helper:"clone"
+        }
+        );
+
+//        selectable
+        $("#div1").selectable({
+            distance:1
+        });
+
+    //        购物车
+    $("div#books img").draggable({
+        revert: "invalid"
+    });
+
+    $("div#shopping").droppable({
+        hoverClass:"hover",
+        deactivate:function (event,ui) {
+          var selector=$.browser.msie ?
+                        "div#books img[isSelected=true]":
+                        "div#books img.ui-selected";
+          $(selector).each(function (index) {
+              $(this).css({position:"relative",top:"0px",left:"0px"});
+          });
+        },
+       drop:function (event,ui) {
+           var selector=$.browser.msie ?
+               "div#books img[isSelected=true]":
+               "div#books img.ui-selected";
+           $(selector).each(function (index) {
+               $("div#shopping").append(this);
+               $(this).css({position:"relative",top:"0px",left:"0px"})
+                   .removeClass("ui-selected");
+           });
+
+       }
+    });
+    $("div#books").selectable({
+       selected:function (event,ui) {
+           ui.selected.isSelected=true;
+           $(ui.selected).draggable({
+               start:function (event) {
+                   $("div#books").selectable("disable");
+               },
+               drag:function (event,ui) {
+                   var selector=$.browser.msie ?
+                       "div#books img[isSelected=true]":
+                       "div#books img.ui-selected   ";
+                   $(selector).each(function (index) {
+                       $(this).css({position:"relative",
+                                    top:ui.helper.css("top"),
+                                    left:ui.helper.css("left")});
+                   });
+               },
+               stop:function (event) {
+                   $("div#books").selectable("enable");
+               }
+           });
+       } ,
+        unselected:function (event,ui) {
+            ui.unselected.isSelected=false;
+            $(ui.unselected).draggable("destroy");
+        }
+    });
+
+    //        autocomplete
+    var books = ["web development with J2EE", "jquery cookbook", "script", "abc", "ab"];
+    $("input#book").autocomplete({
+        source: books,
+        open: function (event) {
+            var $ul = $(this).autocomplete("widget");
+            $ul.hide().slideDown(200);
+        }
+    });
+
+    //        datepicker
+    $("input#date1").datepicker({
+        showAnim: "puff"
+    });
+    $("input#date2").datepicker({
+        beforeShowDay: function (date) {
+            var dayOfWeek = date.getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) return [false];
+            else return [true];
+        }
+    });
+
+    //        slide
+    $("#slider").slider({
+        animate: true,
+        step: 1,
+        slide: function (event) {
+            var value = $("div#slider").slider("value");
+            $("#slider_value").html(value);
+        }
+    });
+
+    //        progressbar
+    $("#progressbar").progressbar();
+    var value = 0;
+    var timer = setInterval(function () {
+        $("div#progressbar").progressbar("value", value);
+        value++;
+        $("#percent").html(value - 1 + "%");
+        if (value > 100) clearInterval(timer);
+    }, 10);
+
+    //          buttons
+    $("#dates").button({
+        icons: {secondary: "ui_icon_calendar"}
+    }).click(function () {
+        var date = $(this).button("option", "icons").secondary == "ui_icon_calendar" ? false : true;
+        if (date) {
+            $(this).button("option", "label", "date");
+            $(this).button("option", "icons", {secondary: "ui_icon_calendar"});
+        } else {
+            $(this).button("option", "label", "video");
+            $(this).button("option", "icons", {secondary: "ui_icon_video"});
+
+        }
+    });
+
+    $("#red,#green,#grey").button();
+    $("#checkbox_button_div").buttonset();
+
+    $("#m,#f").button();
+
+    $("#button1").button();
+    $("#fm_button_div").buttonset();
+
+    $("#dialog").dialog({
+        show: "puff",
+        hide: "scale",
+        modal: "false",
+        draggable: "false",
+        resizable: "false",
+        buttons: {
+            "yes": function () {
+                $("div#dialog").dialog("close");
+            },
+            "no": function () {
+
+            }
+        }
+    });
+
+    $("#tabs").tabs({
+        fx: {opacity: "toggle"}
+    });
+
+    $("#accordion").accordion({
+        event: "mouseover",
+        animated: "easeInExpo"
+    });
+    })
+    ;
+
+</script>
+</html>
